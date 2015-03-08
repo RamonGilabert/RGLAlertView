@@ -19,7 +19,6 @@
 
 - (void)setTitle:(NSString *)title;
 - (void)setBody:(NSString *)body;
-- (void)addDismissButton:(NSString *)buttonTitle;
 - (void)addButtonWithTitle:(NSString *)buttonTitle;
 - (void)addTextFieldWithPlaceholder:(NSString *)textField;
 - (void)addImageInTop:(UIImage *)image;

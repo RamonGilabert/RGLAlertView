@@ -18,15 +18,28 @@
 
 - (void)setTitle:(NSString *)title
 {
+    CGRect currentRectOfAlert = self.alertView.frame;
+    CGRect currentRectBody = self.labelBody.frame;
+    CGRect currentRectButton = self.buttonDismiss.frame;
 
+    self.alertView.transform = CGAffineTransformIdentity;
+    self.labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, currentRectOfAlert.size.width - 30, 30)];
+    self.labelTitle.numberOfLines = 2;
+    self.labelTitle.text = title;
+    self.labelTitle.textAlignment = NSTextAlignmentCenter;
+    self.labelTitle.font = [UIFont fontWithName:@"AvenirNext-Regular" size:22];
+    [self.labelTitle sizeToFit];
+    CGRect rectOfLabel = self.labelTitle.frame;
+    self.labelTitle.frame = CGRectMake(15, 15, (currentRectOfAlert.size.width + rectOfLabel.size.width)/2 + 30, rectOfLabel.size.height);
+    self.alertView.frame = CGRectMake(50, (self.deviceHeight - (currentRectOfAlert.size.height + rectOfLabel.size.height + 60))/2, self.deviceWidth - 100, currentRectOfAlert.size.height + rectOfLabel.size.height);
+    self.labelBody.frame = CGRectMake(currentRectBody.origin.x, self.labelTitle.frame.origin.y + self.labelTitle.frame.size.height + 12, currentRectBody.size.width, currentRectBody.size.height);
+    self.buttonDismiss.frame = CGRectMake(currentRectButton.origin.x, self.alertView.frame.size.height - currentRectButton.size.height, currentRectButton.size.width, currentRectButton.size.height);
+
+    [self.alertView addSubview:self.labelTitle];
+    self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
 }
 
 - (void)setBody:(NSString *)body
-{
-
-}
-
-- (void)addDismissButton:(NSString *)buttonTitle
 {
 
 }
@@ -55,7 +68,7 @@
 
     if (animationOption == 0) {
         [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:10 initialSpringVelocity:20 options:0 animations:^{
-            self.alertView.transform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(0), 0, 0);
+            self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
         } completion:^(BOOL finished) {
             
         }];
