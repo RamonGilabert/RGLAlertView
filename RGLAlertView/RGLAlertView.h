@@ -12,6 +12,7 @@
 @property (strong, nonatomic) UIButton *buttonSecond;
 @property (strong, nonatomic) UIButton *buttonThird;
 @property (strong, nonatomic) NSMutableArray *arrayOfButtons;
+@property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIColor *backgroundColor;
 
 - (instancetype)initWithBodyMessage:(NSString *)stringText andDismissButtonText:(NSString *)dismissButtonText;
@@ -21,8 +22,7 @@
 
 - (void)setTitle:(NSString *)title;
 - (void)setBody:(NSString *)body;
-- (void)addSecondButtonWithTitle:(NSString *)buttonTitle;
-- (void)addThirdButtonWithTitle:(NSString *)buttonTitle;
+- (void)addButtonWithTitle:(NSString *)buttonTitle;
 - (void)addTextFieldWithPlaceholder:(NSString *)textField;
 - (void)addImageInTop:(UIImage *)image;
 
