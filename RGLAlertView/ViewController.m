@@ -71,7 +71,10 @@
 
 - (IBAction)onThirdButtonPressed:(UIButton *)sender
 {
-
+    RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss"];
+    [view setTitle:@"Alert with title"];
+    [view setBody:@"Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup?"];
+    [view presentAlertViewWithAnimation:0];
 }
 
 - (IBAction)onFourthButtonPressed:(UIButton *)sender

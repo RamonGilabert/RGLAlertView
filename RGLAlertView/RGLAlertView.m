@@ -22,6 +22,8 @@
     CGRect currentRectBody = self.labelBody.frame;
     CGRect currentRectButton = self.buttonDismiss.frame;
 
+    [self.labelTitle removeFromSuperview];
+
     self.alertView.transform = CGAffineTransformIdentity;
     self.labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, currentRectOfAlert.size.width - 30, 30)];
     self.labelTitle.numberOfLines = 2;
@@ -41,7 +43,23 @@
 
 - (void)setBody:(NSString *)body
 {
+    CGRect currentRectOfAlert = self.alertView.frame;
+    CGRect currentRectTitle = self.labelTitle.frame;
+    CGRect currentRectButton = self.buttonDismiss.frame;
+    CGRect currentRectBody = self.labelBody.frame;
 
+    [self.labelBody removeFromSuperview];
+
+    self.alertView.transform = CGAffineTransformIdentity;
+    self.labelBody.text = body;
+    [self.labelBody sizeToFit];
+    CGRect rectOfLabel = self.labelBody.frame;
+    self.labelBody.frame = CGRectMake(15, currentRectTitle.origin.y + currentRectTitle.size.height + 12, currentRectOfAlert.size.width - 30, rectOfLabel.size.height);
+    self.alertView.frame = CGRectMake(50, (self.deviceHeight - (currentRectOfAlert.size.height - currentRectBody.size.height + rectOfLabel.size.height + 30))/2, self.deviceWidth - 100, currentRectOfAlert.size.height - currentRectBody.size.height + rectOfLabel.size.height);
+    self.buttonDismiss.frame = CGRectMake(0, self.alertView.frame.size.height - currentRectButton.size.height, self.alertView.frame.size.width, currentRectButton.size.height);
+
+    [self.alertView addSubview:self.labelBody];
+    self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
 }
 
 - (void)addButtonWithTitle:(NSString *)buttonTitle
@@ -118,7 +136,7 @@
     [self.labelBody sizeToFit];
     CGRect labelRect = self.labelBody.frame;
     self.alertView.frame = CGRectMake(50, (self.deviceHeight - (labelRect.size.height + 50 + 50))/2, self.deviceWidth - 100, labelRect.size.height + 50 + 50);
-    self.labelBody.frame = CGRectMake(15, (self.alertView.frame.size.height -  labelRect.size.height - 50)/2, labelRect.size.width, labelRect.size.height);
+    self.labelBody.frame = CGRectMake(15, (self.alertView.frame.size.height -  labelRect.size.height - 50)/2, self.alertView.frame.size.width - 30, labelRect.size.height);
     [self.alertView addSubview:self.labelBody];
 
     self.buttonDismiss = [[UIButton alloc] initWithFrame:CGRectMake(0, self.alertView.frame.size.height - 50, self.alertView.frame.size.width, 50)];
