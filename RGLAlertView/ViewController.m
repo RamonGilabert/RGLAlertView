@@ -57,7 +57,17 @@
 
 - (IBAction)onFirstButtonPressed:(UIButton *)sender
 {
+    UIView *firstAlert = [[UIView alloc] initWithFrame:CGRectMake(50, self.deviceHeight/3, self.deviceWidth - 100, 200)];
+    firstAlert.backgroundColor = [UIColor whiteColor];
+    firstAlert.layer.cornerRadius = 7;
+    firstAlert.transform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(M_PI/6), 0, -500);
+    [self.view addSubview:firstAlert];
 
+    [UIView animateWithDuration:1 delay:0 usingSpringWithDamping:500 initialSpringVelocity:10 options:0 animations:^{
+        firstAlert.transform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(0), 0, 0);
+    } completion:^(BOOL finished) {
+
+    }];
 }
 
 - (IBAction)onSecondButtonPressed:(UIButton *)sender
