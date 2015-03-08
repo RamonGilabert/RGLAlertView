@@ -23,7 +23,6 @@
 - (void)setTitle:(NSString *)title;
 - (void)setBody:(NSString *)body;
 - (void)addButtonWithTitle:(NSString *)buttonTitle;
-- (void)addTextFieldWithPlaceholder:(NSString *)textField;
 - (void)addImageInTop:(UIImage *)image;
 
 @end

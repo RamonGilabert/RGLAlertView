@@ -97,28 +97,24 @@
         self.alertView.transform = CGAffineTransformIdentity;
 
         self.imageView = [[UIImageView alloc] initWithImage:image];
-        self.imageView.frame = CGRectMake((self.deviceWidth - 70)/2, self.alertView.frame.origin.y - 35, 70, 70);
+        self.imageView.frame = CGRectMake((self.deviceWidth - 70)/2, self.alertView.frame.origin.y - 40, 70, 70);
         self.imageView.layer.cornerRadius = self.imageView.frame.size.width/2;
-        self.imageView.layer.borderWidth = 5;
+        self.imageView.layer.borderWidth = 6;
         self.imageView.layer.borderColor = self.alertView.backgroundColor.CGColor;
+        self.imageView.layer.masksToBounds = YES;
 
-        self.labelTitle.frame = CGRectMake(self.labelTitle.frame.origin.x, self.labelTitle.frame.origin.y + 27.5, self.labelTitle.frame.size.width, self.labelTitle.frame.size.height);
-        self.labelBody.frame = CGRectMake(self.labelBody.frame.origin.x, self.labelBody.frame.origin.y + 17.5, self.labelBody.frame.size.width, self.labelBody.frame.size.height);
-        self.buttonDismiss.frame = CGRectMake(self.buttonDismiss.frame.origin.x, self.buttonDismiss.frame.origin.y + 10, self.buttonDismiss.frame.size.width, self.buttonDismiss.frame.size.height);
-        self.buttonSecond.frame = CGRectMake(self.buttonSecond.frame.origin.x, self.buttonSecond.frame.origin.y + 10, self.buttonSecond.frame.size.width, self.buttonSecond.frame.size.height);
-        self.buttonThird.frame = CGRectMake(self.buttonThird.frame.origin.x, self.buttonThird.frame.origin.y + 10, self.buttonThird.frame.size.width, self.buttonThird.frame.size.height);
-        self.alertView.frame = CGRectMake(self.alertView.frame.origin.x, self.alertView.frame.origin.y - 5, self.alertView.frame.size.width, self.alertView.frame.size.height + 10);
+        self.labelTitle.frame = CGRectMake(self.labelTitle.frame.origin.x, self.labelTitle.frame.origin.y + 25, self.labelTitle.frame.size.width, self.labelTitle.frame.size.height);
+        self.labelBody.frame = CGRectMake(self.labelBody.frame.origin.x, self.labelBody.frame.origin.y + 20, self.labelBody.frame.size.width, self.labelBody.frame.size.height);
+        self.buttonDismiss.frame = CGRectMake(self.buttonDismiss.frame.origin.x, self.buttonDismiss.frame.origin.y + 15, self.buttonDismiss.frame.size.width, self.buttonDismiss.frame.size.height);
+        self.buttonSecond.frame = CGRectMake(self.buttonSecond.frame.origin.x, self.buttonSecond.frame.origin.y + 15, self.buttonSecond.frame.size.width, self.buttonSecond.frame.size.height);
+        self.buttonThird.frame = CGRectMake(self.buttonThird.frame.origin.x, self.buttonThird.frame.origin.y + 15, self.buttonThird.frame.size.width, self.buttonThird.frame.size.height);
+        self.alertView.frame = CGRectMake(self.alertView.frame.origin.x, self.alertView.frame.origin.y - 7.5, self.alertView.frame.size.width, self.alertView.frame.size.height + 15);
 
         [self addSubview:self.imageView];
 
         self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
         self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
     }
-}
-
-- (void)addTextFieldWithPlaceholder:(NSString *)textField
-{
-
 }
 
 #pragma mark - Animation options
@@ -135,6 +131,12 @@
         } completion:^(BOOL finished) {
             
         }];
+    } else if (animationOption == 1) {
+
+    } else if (animationOption == 2) {
+
+    } else if (animationOption == 3) {
+        
     }
 }
 
@@ -144,7 +146,7 @@
 {
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:10 initialSpringVelocity:20 options:0 animations:^{
         self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
-        self.alertView.transform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(0), 50, -500);
+        self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
         self.backgroundView.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
