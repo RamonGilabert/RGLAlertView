@@ -90,7 +90,9 @@
 
 - (IBAction)onFifthButtonPressed:(UIButton *)sender
 {
-
+    RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss"];
+    [view setTitle:@"Alert with title"];
+    [view presentAlertViewWithAnimation:1];
 }
 
 - (IBAction)onSixthButtonPressed:(UIButton *)sender

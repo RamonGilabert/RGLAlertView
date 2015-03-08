@@ -118,7 +118,8 @@
         self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
         self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
     } else if (animationOption == 1) {
-
+        self.imageView.transform = CGAffineTransformMakeScale(0, 0);
+        self.alertView.transform = CGAffineTransformMakeScale(0, 0);
     } else if (animationOption == 2) {
 
     } else if (animationOption == 3) {
@@ -136,11 +137,17 @@
             
         }];
     } else if (animationOption == 1) {
-
-    } else if (animationOption == 2) {
-
-    } else if (animationOption == 3) {
-        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.imageView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+            self.alertView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.imageView.transform = CGAffineTransformMakeScale(1, 1);
+                self.alertView.transform = CGAffineTransformMakeScale(1, 1);
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
     }
 
     self.animationOption = animationOption;
@@ -159,11 +166,18 @@
             [self removeFromSuperview];
         }];
     } else if (self.animationOption == 1) {
-
-    } else if (self.animationOption == 2) {
-
-    } else if (self.animationOption == 3) {
-        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.imageView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+            self.alertView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.imageView.transform = CGAffineTransformMakeScale(0, 0);
+                self.alertView.transform = CGAffineTransformMakeScale(0, 0);
+                self.backgroundView.alpha = 0;
+            } completion:^(BOOL finished) {
+                [self removeFromSuperview];
+            }];
+        }];
     }
 }
 
