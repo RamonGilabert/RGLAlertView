@@ -4,6 +4,7 @@
 
 @property CGFloat deviceWidth;
 @property CGFloat deviceHeight;
+@property UIView *alertView;
 
 - (instancetype)initWithBodyMessage:(NSString *)stringText andDismissButtonText:(NSString *)dismissButtonText;
 
