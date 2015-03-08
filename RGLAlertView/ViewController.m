@@ -59,6 +59,7 @@
 - (IBAction)onFirstButtonPressed:(UIButton *)sender
 {
     RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is the very first and most simple alert" andDismissButtonText:@"Dismiss"];
+    view.labelBody = @"SUP";
     [view presentAlertViewWithAnimation:0];
 }
 
