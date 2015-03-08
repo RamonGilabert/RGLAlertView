@@ -14,6 +14,7 @@
 		F6AB63B71AAC49370049A371 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6AB63B61AAC49370049A371 /* Images.xcassets */; };
 		F6AB63BA1AAC49370049A371 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6AB63B81AAC49370049A371 /* LaunchScreen.xib */; };
 		F6AB63C61AAC49370049A371 /* RGLAlertViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6AB63C51AAC49370049A371 /* RGLAlertViewTests.m */; };
+		F6AB63D11AAC666D0049A371 /* RGLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6AB63D01AAC666D0049A371 /* RGLAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		F6AB63BF1AAC49370049A371 /* RGLAlertViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGLAlertViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6AB63C41AAC49370049A371 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F6AB63C51AAC49370049A371 /* RGLAlertViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGLAlertViewTests.m; sourceTree = "<group>"; };
+		F6AB63CF1AAC666D0049A371 /* RGLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGLAlertView.h; sourceTree = "<group>"; };
+		F6AB63D01AAC666D0049A371 /* RGLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGLAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,8 @@
 			children = (
 				F6AB63B01AAC49360049A371 /* ViewController.h */,
 				F6AB63B11AAC49360049A371 /* ViewController.m */,
+				F6AB63CF1AAC666D0049A371 /* RGLAlertView.h */,
+				F6AB63D01AAC666D0049A371 /* RGLAlertView.m */,
 				F6AB63B61AAC49370049A371 /* Images.xcassets */,
 				F6AB63A91AAC49360049A371 /* Supporting Files */,
 			);
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6AB63B21AAC49360049A371 /* ViewController.m in Sources */,
+				F6AB63D11AAC666D0049A371 /* RGLAlertView.m in Sources */,
 				F6AB63AF1AAC49360049A371 /* AppDelegate.m in Sources */,
 				F6AB63AC1AAC49360049A371 /* main.m in Sources */,
 			);
@@ -412,6 +418,7 @@
 				F6AB63CB1AAC49370049A371 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F6AB63CC1AAC49370049A371 /* Build configuration list for PBXNativeTarget "RGLAlertViewTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +427,7 @@
 				F6AB63CE1AAC49370049A371 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
