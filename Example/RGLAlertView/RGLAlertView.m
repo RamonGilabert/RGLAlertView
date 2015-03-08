@@ -38,7 +38,6 @@
     self.buttonDismiss.frame = CGRectMake(currentRectButton.origin.x, self.alertView.frame.size.height - currentRectButton.size.height, currentRectButton.size.width, currentRectButton.size.height);
 
     [self.alertView addSubview:self.labelTitle];
-    self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
 }
 
 - (void)setBody:(NSString *)body
@@ -59,7 +58,6 @@
     self.buttonDismiss.frame = CGRectMake(0, self.alertView.frame.size.height - currentRectButton.size.height, self.alertView.frame.size.width, currentRectButton.size.height);
 
     [self.alertView addSubview:self.labelBody];
-    self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
 }
 
 - (void)addButtonWithTitle:(NSString *)buttonTitle
@@ -87,8 +85,6 @@
         [self.buttonThird setTitle:buttonTitle forState:UIControlStateNormal];
         self.alertView.frame = CGRectMake(50, (self.deviceHeight - (currentAlertView.size.height + currentDismissButton.size.height*2))/2, currentAlertView.size.width, currentAlertView.size.height + currentDismissButton.size.height*2);
     }
-
-    self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
 }
 
 - (void)addImageInTop:(UIImage *)image
@@ -111,16 +107,24 @@
         self.alertView.frame = CGRectMake(self.alertView.frame.origin.x, self.alertView.frame.origin.y - 7.5, self.alertView.frame.size.width, self.alertView.frame.size.height + 15);
 
         [self addSubview:self.imageView];
-
-        self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
-        self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
     }
 }
 
 #pragma mark - Animation options
 
-- (void)presentAlertViewWithAnimation:(NSUInteger)animationOption
+- (void)presentAlertViewWithAnimation:(int)animationOption
 {
+    if (animationOption == 0) {
+        self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
+        self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
+    } else if (animationOption == 1) {
+
+    } else if (animationOption == 2) {
+
+    } else if (animationOption == 3) {
+        
+    }
+
     UIView *viewController = (UIView *)[UIApplication sharedApplication].keyWindow.subviews.firstObject;
     [viewController addSubview:self];
 
@@ -138,19 +142,29 @@
     } else if (animationOption == 3) {
         
     }
+
+    self.animationOption = animationOption;
 }
 
 #pragma mark - IBAction dismiss button
 
 - (void)onDismissButtonPressed
 {
-    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:10 initialSpringVelocity:20 options:0 animations:^{
-        self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
-        self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
-        self.backgroundView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
+    if (self.animationOption == 0) {
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:10 initialSpringVelocity:20 options:0 animations:^{
+            self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
+            self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
+            self.backgroundView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+    } else if (self.animationOption == 1) {
+
+    } else if (self.animationOption == 2) {
+
+    } else if (self.animationOption == 3) {
+        
+    }
 }
 
 #pragma mark - Helper method
@@ -193,8 +207,6 @@
     self.buttonDismiss.alpha = 0.3;
     [self.buttonDismiss addTarget:nil action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView addSubview:self.buttonDismiss];
-
-    self.alertView.transform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(0), 50, -500);
     
     return self;
 }

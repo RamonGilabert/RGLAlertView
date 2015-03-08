@@ -14,11 +14,12 @@
 @property (strong, nonatomic) NSMutableArray *arrayOfButtons;
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIColor *backgroundColor;
+@property int animationOption;
 
 - (instancetype)initWithBodyMessage:(NSString *)stringText andDismissButtonText:(NSString *)dismissButtonText;
 - (instancetype)initWithBodyMessage:(NSString *)stringText andDismissButtonText:(NSString *)dismissButtonText andBackgroundColor:(UIColor *)backgroundColor;
 
-- (void)presentAlertViewWithAnimation:(NSUInteger)animationOption;
+- (void)presentAlertViewWithAnimation:(int)animationOption;
 
 - (void)setTitle:(NSString *)title;
 - (void)setBody:(NSString *)body;
