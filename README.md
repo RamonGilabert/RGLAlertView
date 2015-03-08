@@ -19,7 +19,7 @@ Import the main file into your Xcode project and import it in the view controlle
 
 In the view you want, instantiate the view, and present it.
 
-```
+```objc
 RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss"];
 [view setTitle:@"Alert with title"];
 [view presentAlertViewWithAnimation:0];
@@ -27,7 +27,7 @@ RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an aler
 
 ### Add more stuff into the alert
 
-```
+```objc
 RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss"];
 [view setTitle:@"Alert with title"];
 [view setBody:@"This is some random text, funny thing about it is that, based in my size, the alert is going to get bigger and bigger!"];
