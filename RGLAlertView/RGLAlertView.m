@@ -62,7 +62,25 @@
     self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
 }
 
-- (void)addButtonWithTitle:(NSString *)buttonTitle
+- (void)addSecondButtonWithTitle:(NSString *)buttonTitle
+{
+    CGRect currentDismissButton = self.buttonDismiss.frame;
+    CGRect currentAlertView = self.alertView.frame;
+
+    self.alertView.transform = CGAffineTransformIdentity;
+
+    self.buttonSecond = [[UIButton alloc] initWithFrame:CGRectMake(0, currentAlertView.size.height - currentDismissButton.size.height, currentAlertView.size.width/2 - 0.5, currentDismissButton.size.height)];
+    self.buttonSecond.backgroundColor = [UIColor blackColor];
+    self.buttonSecond.alpha = 0.3;
+    [self.buttonSecond addTarget:nil action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.alertView addSubview:self.buttonSecond];
+    [self.buttonSecond setTitle:buttonTitle forState:UIControlStateNormal];
+    self.buttonDismiss.frame = CGRectMake(currentAlertView.size.width/2 + 0.5, currentAlertView.size.height - currentDismissButton.size.height, currentAlertView.size.width/2 - 0.5, currentDismissButton.size.height);
+
+    self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
+}
+
+- (void)addThirdButtonWithTitle:(NSString *)buttonTitle
 {
 
 }

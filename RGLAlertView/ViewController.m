@@ -74,6 +74,7 @@
     RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss"];
     [view setTitle:@"Alert with title"];
     [view setBody:@"Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup?"];
+    [view addSecondButtonWithTitle:@"Touch"];
     [view presentAlertViewWithAnimation:0];
 }
 

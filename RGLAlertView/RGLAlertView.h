@@ -9,6 +9,8 @@
 @property (strong, nonatomic) UILabel *labelTitle;
 @property (strong, nonatomic) UILabel *labelBody;
 @property (strong, nonatomic) UIButton *buttonDismiss;
+@property (strong, nonatomic) UIButton *buttonSecond;
+@property (strong, nonatomic) UIButton *buttonThird;
 @property (strong, nonatomic) NSMutableArray *arrayOfButtons;
 @property (strong, nonatomic) UIColor *backgroundColor;
 
@@ -19,7 +21,8 @@
 
 - (void)setTitle:(NSString *)title;
 - (void)setBody:(NSString *)body;
-- (void)addButtonWithTitle:(NSString *)buttonTitle;
+- (void)addSecondButtonWithTitle:(NSString *)buttonTitle;
+- (void)addThirdButtonWithTitle:(NSString *)buttonTitle;
 - (void)addTextFieldWithPlaceholder:(NSString *)textField;
 - (void)addImageInTop:(UIImage *)image;
 
