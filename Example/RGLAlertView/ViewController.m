@@ -80,7 +80,7 @@
 
 - (IBAction)onFourthButtonPressed:(UIButton *)sender
 {
-    RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss"];
+    RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss" andBackgroundColor:[UIColor colorWithRed:0.9 green:0.3 blue:0.24 alpha:1]];
     [view setTitle:@"Alert with title"];
     [view setBody:@"Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup?"];
     [view addButtonWithTitle:@"Touch"];
