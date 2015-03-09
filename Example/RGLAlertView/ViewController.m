@@ -66,7 +66,7 @@
 {
     RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss"];
     [view setTitle:@"Alert with title"];
-    [view presentAlertViewWithAnimation:0];
+    [view presentAlertViewWithAnimation:1];
 }
 
 - (IBAction)onThirdButtonPressed:(UIButton *)sender
@@ -75,7 +75,7 @@
     [view setTitle:@"Alert with title"];
     [view setBody:@"Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup? Hey, sup?"];
     [view addButtonWithTitle:@"Touch"];
-    [view presentAlertViewWithAnimation:0];
+    [view presentAlertViewWithAnimation:1];
 }
 
 - (IBAction)onFourthButtonPressed:(UIButton *)sender

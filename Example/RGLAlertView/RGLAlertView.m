@@ -163,8 +163,8 @@
 - (void)presentAlertViewWithAnimation:(int)animationOption
 {
     if (animationOption == 0) {
-        self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
-        self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
+        self.imageView.transform = CGAffineTransformMakeTranslation(0, -500);
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, -500);
     } else if (animationOption == 1) {
         self.imageView.transform = CGAffineTransformMakeScale(0, 0);
         self.alertView.transform = CGAffineTransformMakeScale(0, 0);
@@ -211,8 +211,8 @@
     
     if (self.animationOption == 0) {
         [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:10 initialSpringVelocity:20 options:0 animations:^{
-            self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
-            self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
+            self.imageView.transform = CGAffineTransformMakeTranslation(0, -500);
+            self.alertView.transform = CGAffineTransformMakeTranslation(0, -500);
             self.backgroundView.alpha = 0;
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
