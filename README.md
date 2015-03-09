@@ -1,3 +1,5 @@
+![RGLAlertView](https://github.com/RamonGilabert/RGLAlertView/blob/master/Resources/Alert.png)
+
 # RGLAlertView
 
 A nicely alternative way to present alert views, add colors, text, customize them with images, and everything as easy as including a string.
@@ -66,7 +68,7 @@ And then call the methods
 
 ## Example
 
-![RGLAlertView](https://github.com/RamonGilabert/RGLAlertView/blob/master/Resources/App.gif = 400px)
+![RGLAlertView](https://github.com/RamonGilabert/RGLAlertView/blob/master/Resources/App.gif)
 
 ## Upcoming features
 
