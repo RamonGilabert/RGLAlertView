@@ -1,5 +1,23 @@
 #import "RGLAlertView.h"
 
+@interface RGLAlertView()
+
+@property CGFloat deviceWidth;
+@property CGFloat deviceHeight;
+@property (strong, nonatomic) UIView *backgroundView;
+@property (strong, nonatomic) UIView *alertView;
+@property (strong, nonatomic) UILabel *labelTitle;
+@property (strong, nonatomic) UILabel *labelBody;
+@property (strong, nonatomic) UIButton *buttonDismiss;
+@property (strong, nonatomic) UIButton *buttonSecond;
+@property (strong, nonatomic) UIButton *buttonThird;
+@property (strong, nonatomic) NSMutableArray *arrayOfButtons;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIColor *backgroundColor;
+@property int animationOption;
+
+@end
+
 @implementation RGLAlertView
 
 - (instancetype)initWithBodyMessage:(NSString *)stringText andDismissButtonText:(NSString *)dismissButtonText
@@ -30,6 +48,7 @@
     self.labelTitle.text = title;
     self.labelTitle.textAlignment = NSTextAlignmentCenter;
     self.labelTitle.font = [UIFont fontWithName:@"AvenirNext-Regular" size:22];
+    self.labelTitle.textColor = [UIColor whiteColor];
     [self.labelTitle sizeToFit];
     CGRect rectOfLabel = self.labelTitle.frame;
     self.labelTitle.frame = CGRectMake(15, 15, (currentRectOfAlert.size.width + rectOfLabel.size.width)/2 + 30, rectOfLabel.size.height);
@@ -38,7 +57,6 @@
     self.buttonDismiss.frame = CGRectMake(currentRectButton.origin.x, self.alertView.frame.size.height - currentRectButton.size.height, currentRectButton.size.width, currentRectButton.size.height);
 
     [self.alertView addSubview:self.labelTitle];
-    self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
 }
 
 - (void)setBody:(NSString *)body
@@ -53,13 +71,13 @@
     self.alertView.transform = CGAffineTransformIdentity;
     self.labelBody.text = body;
     [self.labelBody sizeToFit];
+    self.labelBody.textColor = [UIColor whiteColor];
     CGRect rectOfLabel = self.labelBody.frame;
     self.labelBody.frame = CGRectMake(15, currentRectTitle.origin.y + currentRectTitle.size.height + 12, currentRectOfAlert.size.width - 30, rectOfLabel.size.height);
     self.alertView.frame = CGRectMake(50, (self.deviceHeight - (currentRectOfAlert.size.height - currentRectBody.size.height + rectOfLabel.size.height + 30))/2, self.deviceWidth - 100, currentRectOfAlert.size.height - currentRectBody.size.height + rectOfLabel.size.height);
     self.buttonDismiss.frame = CGRectMake(0, self.alertView.frame.size.height - currentRectButton.size.height, self.alertView.frame.size.width, currentRectButton.size.height);
 
     [self.alertView addSubview:self.labelBody];
-    self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
 }
 
 - (void)addButtonWithTitle:(NSString *)buttonTitle
@@ -70,25 +88,35 @@
     if (!self.buttonSecond) {
         self.buttonSecond = [[UIButton alloc] initWithFrame:CGRectMake(0, currentAlertView.size.height - currentDismissButton.size.height, currentAlertView.size.width/2 - 0.5, currentDismissButton.size.height)];
         self.buttonSecond.backgroundColor = [UIColor blackColor];
-        self.buttonSecond.alpha = 0.3;
-        [self.buttonSecond addTarget:nil action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.alertView addSubview:self.buttonSecond];
         [self.buttonSecond setTitle:buttonTitle forState:UIControlStateNormal];
         self.buttonDismiss.frame = CGRectMake(currentAlertView.size.width/2 + 0.5, currentAlertView.size.height - currentDismissButton.size.height, currentAlertView.size.width/2 - 0.5, currentDismissButton.size.height);
+        [self.buttonSecond addTarget:self action:@selector(onSecondButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.buttonSecond.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+        CGFloat hueColor;
+        CGFloat saturationColor;
+        CGFloat brightnessColor;
+        CGFloat alphaColor;
+        [self.backgroundColor getHue:&hueColor saturation:&saturationColor brightness:&brightnessColor alpha:&alphaColor];
+        self.buttonSecond.backgroundColor = [UIColor colorWithHue:hueColor saturation:saturationColor brightness:(brightnessColor-0.2) alpha:alphaColor];
     } else if (self.buttonSecond && !self.buttonThird) {
         currentDismissButton = CGRectMake(0, currentAlertView.size.height - currentDismissButton.size.height, currentAlertView.size.width, currentDismissButton.size.height - 0.5);
         self.buttonSecond.frame = currentDismissButton;
         self.buttonThird = [[UIButton alloc] initWithFrame:CGRectMake(currentDismissButton.origin.x, currentDismissButton.origin.y + currentDismissButton.size.height + 0.5, currentDismissButton.size.width, currentDismissButton.size.height - 0.5)];
         self.buttonDismiss.frame = CGRectMake(currentDismissButton.origin.x, currentDismissButton.origin.y + currentDismissButton.size.height*2 + 0.5, currentDismissButton.size.width, currentDismissButton.size.height - 0.5);
         self.buttonThird.backgroundColor = [UIColor blackColor];
-        self.buttonThird.alpha = 0.3;
-        [self.buttonThird addTarget:nil action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.alertView addSubview:self.buttonThird];
         [self.buttonThird setTitle:buttonTitle forState:UIControlStateNormal];
         self.alertView.frame = CGRectMake(50, (self.deviceHeight - (currentAlertView.size.height + currentDismissButton.size.height*2))/2, currentAlertView.size.width, currentAlertView.size.height + currentDismissButton.size.height*2);
+        [self.buttonThird addTarget:self action:@selector(onThirdButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.buttonThird.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+        CGFloat hueColor;
+        CGFloat saturationColor;
+        CGFloat brightnessColor;
+        CGFloat alphaColor;
+        [self.backgroundColor getHue:&hueColor saturation:&saturationColor brightness:&brightnessColor alpha:&alphaColor];
+        self.buttonThird.backgroundColor = [UIColor colorWithHue:hueColor saturation:saturationColor brightness:(brightnessColor-0.2) alpha:alphaColor];
     }
-
-    self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
 }
 
 - (void)addImageInTop:(UIImage *)image
@@ -111,16 +139,41 @@
         self.alertView.frame = CGRectMake(self.alertView.frame.origin.x, self.alertView.frame.origin.y - 7.5, self.alertView.frame.size.width, self.alertView.frame.size.height + 15);
 
         [self addSubview:self.imageView];
+    }
+}
 
-        self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
-        self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
+#pragma mark - IBActions second and third button
+
+- (void)onSecondButtonPressed:(UIButton *)sender
+{
+    if ([self.delegate respondsToSelector:@selector(buttonDidPressedWithTitle:)]) {
+        [self.delegate buttonDidPressedWithTitle:sender.titleLabel.text];
+    }
+}
+
+- (void)onThirdButtonPressed:(UIButton *)sender
+{
+    if ([self.delegate respondsToSelector:@selector(buttonDidPressedWithTitle:)]) {
+        [self.delegate buttonDidPressedWithTitle:sender.titleLabel.text];
     }
 }
 
 #pragma mark - Animation options
 
-- (void)presentAlertViewWithAnimation:(NSUInteger)animationOption
+- (void)presentAlertViewWithAnimation:(int)animationOption
 {
+    if (animationOption == 0) {
+        self.imageView.transform = CGAffineTransformMakeTranslation(0, -500);
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, -500);
+    } else if (animationOption == 1) {
+        self.imageView.transform = CGAffineTransformMakeScale(0, 0);
+        self.alertView.transform = CGAffineTransformMakeScale(0, 0);
+    } else if (animationOption == 2) {
+
+    } else if (animationOption == 3) {
+        
+    }
+
     UIView *viewController = (UIView *)[UIApplication sharedApplication].keyWindow.subviews.firstObject;
     [viewController addSubview:self];
 
@@ -132,25 +185,52 @@
             
         }];
     } else if (animationOption == 1) {
-
-    } else if (animationOption == 2) {
-
-    } else if (animationOption == 3) {
-        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.imageView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+            self.alertView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.imageView.transform = CGAffineTransformMakeScale(1, 1);
+                self.alertView.transform = CGAffineTransformMakeScale(1, 1);
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
     }
+
+    self.animationOption = animationOption;
 }
 
 #pragma mark - IBAction dismiss button
 
 - (void)onDismissButtonPressed
 {
-    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:10 initialSpringVelocity:20 options:0 animations:^{
-        self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
-        self.alertView.transform = CGAffineTransformMakeTranslation(50, -500);
-        self.backgroundView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
+    if ([self.delegate respondsToSelector:@selector(buttonDismissDidPressed)]) {
+        [self.delegate buttonDismissDidPressed];
+    }
+    
+    if (self.animationOption == 0) {
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:10 initialSpringVelocity:20 options:0 animations:^{
+            self.imageView.transform = CGAffineTransformMakeTranslation(0, -500);
+            self.alertView.transform = CGAffineTransformMakeTranslation(0, -500);
+            self.backgroundView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+    } else if (self.animationOption == 1) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.imageView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+            self.alertView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.imageView.transform = CGAffineTransformMakeScale(0, 0);
+                self.alertView.transform = CGAffineTransformMakeScale(0, 0);
+                self.backgroundView.alpha = 0;
+            } completion:^(BOOL finished) {
+                [self removeFromSuperview];
+            }];
+        }];
+    }
 }
 
 #pragma mark - Helper method
@@ -160,6 +240,8 @@
     self = [RGLAlertView new];
 
     self.arrayOfButtons = [NSMutableArray new];
+
+    self.backgroundColor = backgroundColor;
 
     self.deviceWidth = [UIScreen mainScreen].bounds.size.width;
     self.deviceHeight = [UIScreen mainScreen].bounds.size.height;
@@ -172,7 +254,7 @@
     [self addSubview:self.backgroundView];
 
     self.alertView = [[UIView alloc] initWithFrame:CGRectMake(50, self.deviceHeight/3 + 30, self.deviceWidth - 100, 150)];
-    self.alertView.backgroundColor = [UIColor colorWithRed:0.73 green:0.27 blue:0.46 alpha:1];
+    self.alertView.backgroundColor = backgroundColor;
     self.alertView.layer.cornerRadius = 7;
     self.alertView.clipsToBounds = YES;
     [self addSubview:self.alertView];
@@ -182,19 +264,24 @@
     self.labelBody.textAlignment = NSTextAlignmentCenter;
     self.labelBody.numberOfLines = 10;
     [self.labelBody sizeToFit];
+    self.labelBody.textColor = [UIColor whiteColor];
     CGRect labelRect = self.labelBody.frame;
     self.alertView.frame = CGRectMake(50, (self.deviceHeight - (labelRect.size.height + 50 + 50))/2, self.deviceWidth - 100, labelRect.size.height + 50 + 50);
     self.labelBody.frame = CGRectMake(15, (self.alertView.frame.size.height -  labelRect.size.height - 50)/2, self.alertView.frame.size.width - 30, labelRect.size.height);
     [self.alertView addSubview:self.labelBody];
 
     self.buttonDismiss = [[UIButton alloc] initWithFrame:CGRectMake(0, self.alertView.frame.size.height - 50, self.alertView.frame.size.width, 50)];
-    self.buttonDismiss.backgroundColor = [UIColor blackColor];
+    CGFloat hueColor;
+    CGFloat saturationColor;
+    CGFloat brightnessColor;
+    CGFloat alphaColor;
+    [backgroundColor getHue:&hueColor saturation:&saturationColor brightness:&brightnessColor alpha:&alphaColor];
+    self.buttonDismiss.backgroundColor = [UIColor colorWithHue:hueColor saturation:saturationColor brightness:(brightnessColor-0.2) alpha:alphaColor];
+    [self.buttonSecond setTintColor:[UIColor whiteColor]];
     [self.buttonDismiss setTitle:@"Dismiss" forState:UIControlStateNormal];
-    self.buttonDismiss.alpha = 0.3;
+    self.buttonDismiss.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
     [self.buttonDismiss addTarget:nil action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView addSubview:self.buttonDismiss];
-
-    self.alertView.transform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(0), 50, -500);
     
     return self;
 }
