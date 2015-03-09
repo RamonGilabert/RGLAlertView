@@ -15,11 +15,13 @@ A nicely alternative way to present alert views, add colors, text, customize the
 
 Import the main file into your Xcode project and import it in the view controller you want the view to appear:
 
-`#import "RGLAlertView.h"`
+```objc
+#import "RGLAlertView.h"
+```
 
 In the view you want, instantiate the view, and present it.
 
-##### Create a simple alert
+#### Create a simple alert
 
 ```objc
 RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss"];
@@ -27,7 +29,7 @@ RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an aler
 [view presentAlertViewWithAnimation:0];
 ```
 
-##### Add more stuff into the alert
+#### Add more stuff into the alert
 
 ```objc
 RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an alert view with a title" andDismissButtonText:@"Dismiss"];
@@ -36,6 +38,30 @@ RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is an aler
 [view addButtonWithTitle:@"Touch"];
 [view addImageInTop:[UIImage imageNamed:@"firstImage"]];
 [view presentAlertViewWithAnimation:0];
+```
+
+#### Use the delegate
+
+With the delegate you're going to be able to know which button is getting tapped. Is that easy:
+
+```objc
+view.delegate = self;
+```
+
+And then call the methods
+
+```objc
+- (void)buttonDidPressedWithTitle:(NSString *)string
+{
+    NSLog(@"%@", string);
+}
+```
+
+```objc
+- (void)buttonDismissDidPressed
+{
+
+}
 ```
 
 ## Upcoming features
