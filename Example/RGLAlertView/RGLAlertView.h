@@ -1,7 +1,15 @@
 #import <UIKit/UIKit.h>
 
+@protocol RGLAlertViewDelegate
+
+- (void)buttonDidPressedWithTitle:(NSString *)string;
+- (void)buttonDismissDidPressed;
+
+@end
+
 @interface RGLAlertView : UIView
 
+@property id <RGLAlertViewDelegate> delegate;
 @property CGFloat deviceWidth;
 @property CGFloat deviceHeight;
 @property (strong, nonatomic) UIView *backgroundView;

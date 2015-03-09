@@ -73,6 +73,7 @@
         [self.alertView addSubview:self.buttonSecond];
         [self.buttonSecond setTitle:buttonTitle forState:UIControlStateNormal];
         self.buttonDismiss.frame = CGRectMake(currentAlertView.size.width/2 + 0.5, currentAlertView.size.height - currentDismissButton.size.height, currentAlertView.size.width/2 - 0.5, currentDismissButton.size.height);
+        [self.buttonSecond addTarget:self action:@selector(onSecondButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     } else if (self.buttonSecond && !self.buttonThird) {
         currentDismissButton = CGRectMake(0, currentAlertView.size.height - currentDismissButton.size.height, currentAlertView.size.width, currentDismissButton.size.height - 0.5);
         self.buttonSecond.frame = currentDismissButton;
@@ -84,6 +85,7 @@
         [self.alertView addSubview:self.buttonThird];
         [self.buttonThird setTitle:buttonTitle forState:UIControlStateNormal];
         self.alertView.frame = CGRectMake(50, (self.deviceHeight - (currentAlertView.size.height + currentDismissButton.size.height*2))/2, currentAlertView.size.width, currentAlertView.size.height + currentDismissButton.size.height*2);
+        [self.buttonThird addTarget:self action:@selector(onThirdButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
@@ -108,6 +110,18 @@
 
         [self addSubview:self.imageView];
     }
+}
+
+#pragma mark - IBActions second and third button
+
+- (void)onSecondButtonPressed:(UIButton *)sender
+{
+    [self.delegate buttonDidPressedWithTitle:sender.titleLabel.text];
+}
+
+- (void)onThirdButtonPressed:(UIButton *)sender
+{
+    [self.delegate buttonDidPressedWithTitle:sender.titleLabel.text];
 }
 
 #pragma mark - Animation options
@@ -157,6 +171,8 @@
 
 - (void)onDismissButtonPressed
 {
+    [self.delegate buttonDismissDidPressed];
+    
     if (self.animationOption == 0) {
         [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:10 initialSpringVelocity:20 options:0 animations:^{
             self.imageView.transform = CGAffineTransformMakeTranslation(50, -500);
