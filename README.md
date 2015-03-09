@@ -66,7 +66,7 @@ And then call the methods
 
 ## Example
 
-![RGLAlertView](https://github.com/RamonGilabert/RGLAlertView/blob/master/Resources/App.gif)
+![RGLAlertView](https://github.com/RamonGilabert/RGLAlertView/blob/master/Resources/App.gif = 400px)
 
 ## Upcoming features
 
