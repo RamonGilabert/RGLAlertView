@@ -1,7 +1,7 @@
 #import "ViewController.h"
 #import "RGLAlertView.h"
 
-@interface ViewController ()
+@interface ViewController () <RGLAlertViewDelegate>
 
 @property CGFloat deviceWidth;
 @property CGFloat deviceHeight;
@@ -97,7 +97,17 @@
 
 - (IBAction)onSixthButtonPressed:(UIButton *)sender
 {
+    RGLAlertView *view = [[RGLAlertView alloc] initWithBodyMessage:@"This is to try the delegate" andDismissButtonText:@"Dismiss"];
+    view.delegate = self;
+    [view addButtonWithTitle:@"Touch"];
+    [view presentAlertViewWithAnimation:1];
+}
 
+#pragma mark - Delegate methods
+
+- (void)buttonDidPressedWithTitle:(NSString *)string
+{
+    NSLog(@"%@", string);
 }
 
 @end

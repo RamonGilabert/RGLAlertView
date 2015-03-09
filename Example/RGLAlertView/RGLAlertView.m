@@ -1,5 +1,23 @@
 #import "RGLAlertView.h"
 
+@interface RGLAlertView()
+
+@property CGFloat deviceWidth;
+@property CGFloat deviceHeight;
+@property (strong, nonatomic) UIView *backgroundView;
+@property (strong, nonatomic) UIView *alertView;
+@property (strong, nonatomic) UILabel *labelTitle;
+@property (strong, nonatomic) UILabel *labelBody;
+@property (strong, nonatomic) UIButton *buttonDismiss;
+@property (strong, nonatomic) UIButton *buttonSecond;
+@property (strong, nonatomic) UIButton *buttonThird;
+@property (strong, nonatomic) NSMutableArray *arrayOfButtons;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIColor *backgroundColor;
+@property int animationOption;
+
+@end
+
 @implementation RGLAlertView
 
 - (instancetype)initWithBodyMessage:(NSString *)stringText andDismissButtonText:(NSString *)dismissButtonText
@@ -69,7 +87,6 @@
         self.buttonSecond = [[UIButton alloc] initWithFrame:CGRectMake(0, currentAlertView.size.height - currentDismissButton.size.height, currentAlertView.size.width/2 - 0.5, currentDismissButton.size.height)];
         self.buttonSecond.backgroundColor = [UIColor blackColor];
         self.buttonSecond.alpha = 0.3;
-        [self.buttonSecond addTarget:nil action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.alertView addSubview:self.buttonSecond];
         [self.buttonSecond setTitle:buttonTitle forState:UIControlStateNormal];
         self.buttonDismiss.frame = CGRectMake(currentAlertView.size.width/2 + 0.5, currentAlertView.size.height - currentDismissButton.size.height, currentAlertView.size.width/2 - 0.5, currentDismissButton.size.height);
@@ -81,7 +98,6 @@
         self.buttonDismiss.frame = CGRectMake(currentDismissButton.origin.x, currentDismissButton.origin.y + currentDismissButton.size.height*2 + 0.5, currentDismissButton.size.width, currentDismissButton.size.height - 0.5);
         self.buttonThird.backgroundColor = [UIColor blackColor];
         self.buttonThird.alpha = 0.3;
-        [self.buttonThird addTarget:nil action:@selector(onDismissButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.alertView addSubview:self.buttonThird];
         [self.buttonThird setTitle:buttonTitle forState:UIControlStateNormal];
         self.alertView.frame = CGRectMake(50, (self.deviceHeight - (currentAlertView.size.height + currentDismissButton.size.height*2))/2, currentAlertView.size.width, currentAlertView.size.height + currentDismissButton.size.height*2);
@@ -116,12 +132,16 @@
 
 - (void)onSecondButtonPressed:(UIButton *)sender
 {
-    [self.delegate buttonDidPressedWithTitle:sender.titleLabel.text];
+    if ([self.delegate respondsToSelector:@selector(buttonDidPressedWithTitle:)]) {
+        [self.delegate buttonDidPressedWithTitle:sender.titleLabel.text];
+    }
 }
 
 - (void)onThirdButtonPressed:(UIButton *)sender
 {
-    [self.delegate buttonDidPressedWithTitle:sender.titleLabel.text];
+    if ([self.delegate respondsToSelector:@selector(buttonDidPressedWithTitle:)]) {
+        [self.delegate buttonDidPressedWithTitle:sender.titleLabel.text];
+    }
 }
 
 #pragma mark - Animation options
@@ -171,7 +191,9 @@
 
 - (void)onDismissButtonPressed
 {
-    [self.delegate buttonDismissDidPressed];
+    if ([self.delegate respondsToSelector:@selector(buttonDismissDidPressed)]) {
+        [self.delegate buttonDismissDidPressed];
+    }
     
     if (self.animationOption == 0) {
         [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:10 initialSpringVelocity:20 options:0 animations:^{
