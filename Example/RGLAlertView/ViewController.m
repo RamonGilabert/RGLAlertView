@@ -20,6 +20,8 @@
 {
     [super viewDidLoad];
 
+    [self setNeedsStatusBarAppearanceUpdate];
+
     self.deviceWidth = [UIScreen mainScreen].bounds.size.width;
     self.deviceHeight = [UIScreen mainScreen].bounds.size.height;
 
@@ -118,6 +120,13 @@
 - (void)buttonDidPressedWithTitle:(NSString *)string
 {
     NSLog(@"%@", string);
+}
+
+#pragma mark - Status bar white
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end
