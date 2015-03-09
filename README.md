@@ -64,6 +64,10 @@ And then call the methods
 }
 ```
 
+## Example
+
+![RGLAlertView](https://github.com/RamonGilabert/RGLAlertView/blob/master/Resources/App.gif)
+
 ## Upcoming features
 
 - TextField support, you're going to be able to listen to some methods once you are typing.
